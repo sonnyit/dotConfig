@@ -1,0 +1,35 @@
+[global_config]
+  enabled_plugins = LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
+[keybindings]
+[profiles]
+  [[default]]
+    palette = "#000000:#990000:#00a600:#999900:#0000b2:#b200b2:#00a6b2:#bfbfbf:#666666:#e50000:#00d900:#e5e500:#0000ff:#e500e5:#00e5e5:#e5e5e5"
+    font = Monaco 10
+    background_image = None
+    scrollback_lines = 5000
+    use_system_font = False
+    cursor_color = "#23ff18"
+    foreground_color = "#00ff00"
+    show_scrollbar = False
+    show_titlebar = False
+    copy_on_selection = True
+    audible_bell = True
+    allow_bold = False
+    scrollback_infinite = True
+  [[Wombat]]
+    palette = "#000000:#ff615a:#b1e969:#ebd99c:#5da9f6:#e86aff:#82fff7:#dedacf:#313131:#f58c80:#ddf88f:#eee5b2:#a5c7ff:#ddaaff:#b7fff9:#ffffff"
+    background_image = None
+    use_system_font = False
+    cursor_color = "#bbbbbb"
+    foreground_color = "#dedacf"
+    font = Monaco 10
+    background_color = "#171717"
+[layouts]
+  [[default]]
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+    [[[window0]]]
+      type = Window
+      parent = ""
+[plugins]

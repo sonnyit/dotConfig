@@ -1,0 +1,27 @@
+#!/bin/bash
+
+
+# disable CapsLock & map to Escape
+#setxkbmap -option caps:swapescape
+
+# clipboard synching
+autocutsel -fork &
+autocutsel -selection PRIMARY -fork &
+
+# set wallpaper
+feh --bg-scale /home/minhnh13/Imgs/wallpaper
+
+# ---- window manager ----
+# launch dwm status bar
+while true; do
+  $HOME/Scripts/dwm_statusbar
+  sleep 2
+done &
+
+# launch dwm
+while true; do
+    # Log stderror to a file
+    #dwm 2>  $HOME/.logs/dwm.log
+    # No error logging
+    dwm >/dev/null
+done
