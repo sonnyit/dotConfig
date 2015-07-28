@@ -8,8 +8,11 @@
 autocutsel -fork &
 autocutsel -selection PRIMARY -fork &
 
+xset +fp /usr/share/fonts/local
+xset fp rehash
+
 # set wallpaper
-feh --bg-scale /home/minhnh13/Imgs/wallpaper
+feh --bg-scale /home/sonny/Imgs/wallpaper
 
 # ---- window manager ----
 # launch dwm status bar

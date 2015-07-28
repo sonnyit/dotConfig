@@ -8,7 +8,7 @@ getCPU() {
 }
 
 getMEM() {
-    mem="$(free -m | awk '/-\/+/ {print $3}')"
+    mem="$(free -m | awk '/Mem/ {print $3}')"
     echo -ne "\x0A${icons[1]}\x01 ${mem}MB"
 }
 

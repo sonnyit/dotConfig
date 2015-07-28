@@ -72,23 +72,6 @@ xterm*|rxvt*)
     ;;
 esac
 
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
-
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
-
-# some more ls aliases
-alias ll='ls -alFht --color=yes'
-alias la='ls -A'
-alias l='ls -CF'
-
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
@@ -120,6 +103,19 @@ PATH=$PATH:$SCALA_HOME/bin
 HOME_SBIN=/home/minhnh13/sbin
 PATH=$HOME_SBIN:$PATH
 
-alias cp='cp -i'
+explain () {
+if [ "$#" -eq 0 ]; then
+while read -p "Command: " cmd; do
+curl -Gs "https://www.mankier.com/api/explain/?cols="$(tput cols) --data-urlencode "q=$cmd"
+done
+echo "Bye!"
+elif [ "$#" -eq 1 ]; then
+curl -Gs "https://www.mankier.com/api/explain/?cols="$(tput cols) --data-urlencode "q=$1"
+else
+echo "Usage"
+echo "explain interactive mode."
+echo "explain 'cmd -o | ...' one quoted command to explain it."
+fi
+}
 
 export JAVA_HOME=/usr/lib/jvm/java-1.7.0-openjdk-amd64

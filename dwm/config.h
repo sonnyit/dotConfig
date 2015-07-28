@@ -28,7 +28,7 @@ static const char font[] = "-*-ohsnap.icons-medium-r-*-*-14-*-*-*-*-*-*-*";
 static const char colors[NUMCOLORS][ColLast][13] = {
     /* border    fg         bg */
     { "#2D2D2D", "#FFFFFF", "#2D2D2D" },        /* 01 - regular */
-    { "#5E5E9E", "#FFFFFF", "#2D2D2D" },        /* 02 - selected */
+    { "#D64937", "#FFFFFF", "#2D2D2D" },        /* 02 - selected #5E5E9E: xanh, #D64937: do, #349147: green */
     { "#2D2D2D", "#FF99CC", "#2D2D2D" },        /* 03 - urgent */
     { "#2D2D2D", "#666666", "#2D2D2D" },        /* 04 - occupied */
     { "#2D2D2D", "#A82222", "#2D2D2D" },        /* 05 - red */
@@ -36,7 +36,7 @@ static const char colors[NUMCOLORS][ColLast][13] = {
     { "#2D2D2D", "#349147", "#2D2D2D" },        /* 07 - green */
     { "#2D2D2D", "#666666", "#2D2D2D" },        /* 08 - dark grey */
     { "#2D2D2D", "#DCDCDC", "#2D2D2D" },        /* 09 - light grey */
-    { "#2D2D2D", "#4779b3", "#2D2D2D" },        /* 0A - orange */
+    { "#2D2D2D", "#D64937", "#2D2D2D" },        /* 0A - orange #4779b3*/
     { "#2D2D2D", "#B86A6A", "#2D2D2D" },        /* 0B - pink */
     { "#2D2D2D", "#FFFFFF", "#2D2D2D" },        /* 0C - white */
     { "#2D2D2D", "#000000", "#2D2D2D" },        /* 0D - black */
@@ -53,7 +53,7 @@ static const Layout layouts[] = {
 static const Tag tags[] = {
     /* name     layout          mfact   nmaster */
     { "web",    &layouts[0],    -1,     -1 },
-    { "term",   &layouts[3],    -1,     -1 },
+    { "term",   &layouts[2],    -1,     -1 },
     { "chat",   &layouts[0],    -1,     -1 },
     { "media",  &layouts[1],    -1,     -1 },
     { "edit",   &layouts[0],    -1,     -1 },
@@ -77,10 +77,12 @@ static const Rule rules[] = {
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
-
+/* Brightness keys */
+#define KEY_BRIGHTNESS_UP 0x1008ff02
+#define KEY_BRIGHTNESS_DOWN 0x1008ff03
 static const char *menu[] = { "dmenu_run", "-i", "-fn", font, "-nb", colors[0][ColBG], "-nf", colors[0][ColFG], "-sb", colors[1][ColBG], "-sf", colors[9][ColFG], NULL };
-static const char *webb[] = { "google-chrome-stable", NULL, "Google-chrome-stable" };
-static const char *file[] = { "pcmanfm", NULL, "Pcmanfm" };
+static const char *webb[] = { "chromium", NULL, "Chromium" };
+static const char *file[] = { "thunar", NULL, "Thunar" };
 static const char *mailcmd[] = { "urxvtc", "-title", "mutt", "-e", "mutt", NULL };
 static const char *tmuxcmd[] = { "urxvtc", "-title", "tmux", "-e", "tmux", NULL };
 static const char *yt[] = { "urxvtc", "-title", "YouTube" "-e", "youtube-viewer", NULL };
@@ -90,12 +92,16 @@ static const char *chat[] = { "skype", NULL, "Skype" };
 static const char *mute[] = { "amixer", "-q", "set", "Master", "toggle", NULL };
 static const char *volu[] = { "amixer", "-q", "set", "Master", "5%+", "unmute", NULL };
 static const char *vold[] = { "amixer", "-q", "set", "Master", "5%-", "unmute", NULL };
+static const char *cmdbrightnessup[] = { "light", "-A", "5", NULL };
+static const char *cmdbrightnessdown[] = { "light", "-U", "5", NULL };
 
 static Key keys[] = {
     { MONKEY,           XK_p,       spawn,          {.v = menu } },
     { MONKEY,           XK_F10,     spawn,          {.v = mute } },
     { MONKEY,           XK_F11,     spawn,          {.v = vold } },
     { MONKEY,           XK_F12,     spawn,          {.v = volu } },
+    { MONKEY,           XK_F6,      spawn,          {.v = cmdbrightnessup } },
+    { MONKEY,           XK_F5,      spawn,          {.v = cmdbrightnessdown } },
 
     { MONKEY|ShiftMask, XK_w,       runorraise,          {.v = webb } },
     { MONKEY|ShiftMask, XK_Return,  spawn,     {.v = term } },
